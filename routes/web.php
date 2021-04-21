@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ScrumblerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +17,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return redirect('/login');
 });
-
+Route::post('/login_new',[LoginController::class,'authenticate'])->name('login-new');
+Route::get('/start',[ScrumblerController::class,'index']);
+Route::post('/start_now',[ScrumblerController::class,'start_now']);
+Route::get('/scrambler',[ScrumblerController::class,'scrambler']);
+Route::get('/scrambler/finish',[ScrumblerController::class,'finish']);
+Route::post('/check_word',[ScrumblerController::class,'check_word'])->name('check_word');
+Route::get('/myprofile',[ProfileController::class,'index']);
+Route::get('/myprofile/stages/detail/{stage}',[ProfileController::class,'detail']);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
