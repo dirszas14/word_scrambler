@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScrumblerController;
@@ -28,8 +29,10 @@ Route::get('/scrambler/finish',[ScrumblerController::class,'finish']);
 Route::post('/check_word',[ScrumblerController::class,'check_word'])->name('check_word');
 Route::get('/myprofile',[ProfileController::class,'index']);
 Route::get('/myprofile/stages/detail/{stage}',[ProfileController::class,'detail']);
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/history_log',[DashboardController::class,'history'])->name('history_log');
+Route::get('/dashboard',[DashboardController::class,'index'])->middleware('auth')->name('dashboard');
 
-require __DIR__.'/auth.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

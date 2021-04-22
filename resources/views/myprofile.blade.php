@@ -1,4 +1,5 @@
-@extends('welcome')
+@extends('layouts.app')
+
 
 @section('content')
     <table class="table table-bordered">

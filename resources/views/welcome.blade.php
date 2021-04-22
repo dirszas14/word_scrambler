@@ -21,37 +21,6 @@
             @yield('content')
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" integrity="sha512-eYSzo+20ajZMRsjxB6L7eyqo5kuXuS2+wEbbOkpaur+sA2shQameiJiWEzCIDwJqaB0a4a6tCuEvCOBHUg3Skg==" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        }); 
-        $(document).ajaxError(function (e, xhr, options, exc) {
-            $.unblockUI()
-
-            if (xhr.status == 422) {
-
-                var json = $.parseJSON(xhr.responseText);
-                var errorsHtml = '';
-                $('*[id*=error]').html('');
-                $.each(json.errors, function (key, value) {
-                    errorsHtml += '<li>' + value + '</li>';
-                    $(`#${key}_error`).html(value).show();
-                });
-            } else {
-                var errorsHtml = xhr.responseText;
-            }
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Warning!',
-                        html: errorsHtml,
-                    });
-            // Command: toastr["error"](errorsHtml);
-        });
-    </script>
-    @yield('footer')
+    
 </body>
 </html>

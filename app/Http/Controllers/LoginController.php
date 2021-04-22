@@ -10,7 +10,7 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
+        // dd($credentials);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             if(Auth::user()->type=='Admin'){
