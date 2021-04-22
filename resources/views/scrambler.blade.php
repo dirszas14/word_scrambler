@@ -3,7 +3,7 @@
 
 @section('content')
 
-<div class="row" style="padding-top:300px;">
+<div class="row">
     <div class="col-lg-6 mx-auto">
         <div class="card  h-100">
             <h5 class="card-header">Guess Word</h5>
@@ -11,7 +11,8 @@
                 @php
                     $shuffle_word=(str_shuffle($word->word)==$word->word) ? str_shuffle($word->word) : str_shuffle($word->word);
                 @endphp
-              <h5 class="card-title text-center">{{$shuffle_word}}</h5>
+              <h3 class="card-title text-center">{{$shuffle_word}}</h3>
+              <p class="text-center">Hints: <b>{{$word->hint}}</b></p>
               <form id="form-word">
                 <div class="form-group">
                     <input type="hidden" name="id" value="{{$word->id}}">

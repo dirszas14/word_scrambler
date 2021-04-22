@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -34,15 +34,21 @@
                         @auth
                             
                         @if (Auth::user()->type=='Admin')
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url('dashboard')}}">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">History Log</a>
+                            <a class="nav-link" href="{{url('user')}}">User List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url('words')}}">Words</a>
                         </li>
                         @else
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{url('/myprofile')}}">My Profile <span class="sr-only">(current)</span></a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url('/myprofile')}}">My Profile </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url('/start')}}">Play Game! </a>
                         </li>
                         @endif
                                 
@@ -97,7 +103,9 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                @yield('content')
+            </div>
         </main>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" integrity="sha512-eYSzo+20ajZMRsjxB6L7eyqo5kuXuS2+wEbbOkpaur+sA2shQameiJiWEzCIDwJqaB0a4a6tCuEvCOBHUg3Skg==" crossorigin="anonymous"></script>
