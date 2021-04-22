@@ -34,7 +34,7 @@
                           <td>{{$u->hint}}</td>
                           <td>
                             <a href="#" class="btn btn-info btn-sm" onclick="edit({{$u->id}})">Edit</a>
-                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="#" class="btn btn-danger btn-sm" onclick="deleteWord({{$u->id}},'{{$u->word}}')">Delete</a>
                         </td>
                       </tr>
                   @endforeach
@@ -77,6 +77,43 @@
     </div>
   </div>
   <script>
+    function deleteWord(id,name)
+    {
+      Swal.fire({
+  title: `Are you sure delete ${name}?`,
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    
+    $.ajax({
+            url:"{{route('delete.word')}}",
+            type:'POST',
+            data:{id:id},
+            beforeSend:()=>{
+                $.blockUI();
+            },
+            complete:()=>{
+                $.unblockUI();
+            },
+            success:(data)=>{
+              Swal.fire(
+            'Deleted!',
+            'the word has been deleted.',
+            'success'
+          );
+          setTimeout(() => {
+            location.reload();
+          }, 1500);
+            }
+        })
+  }
+})
+    }
       function edit(id){
         $.ajax({
             url:"{{route('edit.word')}}",

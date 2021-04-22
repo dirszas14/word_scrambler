@@ -59,4 +59,10 @@ class DashboardController extends Controller
             'id'=>$id
         ]);
     }
+    public function delete_word(Request $request)
+    {
+        $id=$request->id;
+        $scrambler=Scrambler::find($id);
+        $scrambler->delete();
+    }
 }

@@ -46,6 +46,8 @@ Route::group(['middleware'=>['auth', 'role:Admin']],function(){
     Route::get('/words',[DashboardController::class,'words']);
     Route::post('store_words',[DashboardController::class,'store_words'])->name('store.word');
     Route::post('/edit_word',[DashboardController::class,'edit_word'])->name('edit.word');
+    Route::post('/delete_word',[DashboardController::class,'delete_word'])->name('delete.word');
+
 });
 Route::get('/dashboard',[DashboardController::class,'index'])->middleware('auth')->name('dashboard');
 
